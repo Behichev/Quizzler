@@ -9,8 +9,9 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var falseButton: UIButton!
-    @IBOutlet weak var trueButton: UIButton!
+    @IBOutlet weak var optionTwoButton: UIButton!
+    @IBOutlet weak var optionOneButton: UIButton!
+    @IBOutlet weak var optionThreeButton: UIButton!
     @IBOutlet weak var questionsProgressView: UIProgressView!
     @IBOutlet weak var questionTextLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -25,7 +26,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func answerButtonPressed(_ sender: UIButton) {
-        
         
         guard let userAnswer = sender.currentTitle else { return }
         let userGotItRight = quizBrain.checkAnswer(userAnswer)
@@ -44,11 +44,19 @@ class ViewController: UIViewController {
     }
     
     func updateUI() {
+        let answerOptions = quizBrain.getAnswers()
+        optionOneButton.setTitle(answerOptions[0], for: .normal)
+        optionTwoButton.setTitle(answerOptions[1], for: .normal)
+        optionThreeButton.setTitle(answerOptions[2], for: .normal)
+        
         questionTextLabel.text = quizBrain.getQuestionText()
         questionsProgressView.progress = quizBrain.getProgress()
         scoreLabel.text = "Score:\(quizBrain.getScore())"
-        trueButton.backgroundColor = #colorLiteral(red: 0.2784313725, green: 0.7098039216, blue: 1, alpha: 1)
-        falseButton.backgroundColor = #colorLiteral(red: 0.2784313725, green: 0.7098039216, blue: 1, alpha: 1)
+        
+        optionOneButton.backgroundColor = #colorLiteral(red: 0.2784313725, green: 0.7098039216, blue: 1, alpha: 1)
+        optionTwoButton.backgroundColor = #colorLiteral(red: 0.2784313725, green: 0.7098039216, blue: 1, alpha: 1)
+        optionThreeButton.backgroundColor = #colorLiteral(red: 0.2784313725, green: 0.7098039216, blue: 1, alpha: 1)
+        
         
     }
     
